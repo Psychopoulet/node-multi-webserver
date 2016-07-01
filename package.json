@@ -2,9 +2,9 @@
   "name": "node-multi-webserver",
   "version": "0.1.0",
   "description": "A 'fs' object extension",
-  "main": "dist/main.js",
+  "main": "lib/main.js",
   "scripts": {
-    "start": "node dist/main.js",
+    "start": "node lib/main.js",
     "test": "gulp"
   },
   "repository": {
@@ -22,16 +22,14 @@
   "dependencies": {},
   "devDependencies": {
 
+    "simplessl": "1.5.0",
+    "node-promfs": "0.1.0",
+
     "gulp": "^3.9.0",
-    "gulp-exclude-gitignore": "^1.0.0",
-    "gulp-plumber": "^1.0.0",
-
     "gulp-eslint": "^2.0.0",
-
-    "gulp-babel": "^6.1.2",
-    "babel-preset-es2015-node4": "^2.1.0",
-
-    "gulp-mocha": "^2.0.0"
+    "gulp-exclude-gitignore": "^1.0.0",
+    "gulp-mocha": "^2.0.0",
+    "gulp-plumber": "^1.0.0"
 
   },
   "homepage": "https://github.com/Psychopoulet/node-multi-webserver#readme",

@@ -50,11 +50,11 @@ describe("create one http server", function() {
 
 		}).then(function() {
 
-			assert.strictEqual(1, servers.webservers.length, "server number is incorrect");
+			assert.strictEqual(1, servers.servers.length, "server number is incorrect");
 
-			assert.strictEqual(1337, servers.webservers[0].port, "first server name is incorrect");
-			assert.strictEqual("basic http server", servers.webservers[0].name, "first server name is incorrect");
-			assert.strictEqual(false, servers.webservers[0].ssl, "first server ssl is incorrect");
+			assert.strictEqual(1337, servers.servers[0].options.port, "first server name is incorrect");
+			assert.strictEqual("basic http server", servers.servers[0].options.name, "first server name is incorrect");
+			assert.strictEqual(false, servers.servers[0].options.ssl, "first server ssl is incorrect");
 
 			return Promise.resolve();
 
@@ -149,15 +149,15 @@ describe("create two http servers", function() {
 
 		}).then(function() {
 
-			assert.strictEqual(2, servers.webservers.length, "server number is incorrect");
+			assert.strictEqual(2, servers.servers.length, "server number is incorrect");
 
-			assert.strictEqual(1337, servers.webservers[0].port, "first server name is incorrect");
-			assert.strictEqual("basic http server", servers.webservers[0].name, "first server name is incorrect");
-			assert.strictEqual(false, servers.webservers[0].ssl, "first server ssl is incorrect");
+			assert.strictEqual(1337, servers.servers[0].options.port, "first server name is incorrect");
+			assert.strictEqual("basic http server", servers.servers[0].options.name, "first server name is incorrect");
+			assert.strictEqual(false, servers.servers[0].options.ssl, "first server ssl is incorrect");
 
-			assert.strictEqual(1338, servers.webservers[1].port, "second server name is incorrect");
-			assert.strictEqual("admin server", servers.webservers[1].name, "second server name is incorrect");
-			assert.strictEqual(false, servers.webservers[1].ssl, "second server ssl is incorrect");
+			assert.strictEqual(1338, servers.servers[1].options.port, "second server name is incorrect");
+			assert.strictEqual("admin server", servers.servers[1].options.name, "second server name is incorrect");
+			assert.strictEqual(false, servers.servers[1].options.ssl, "second server ssl is incorrect");
 
 			return Promise.resolve();
 
@@ -255,11 +255,11 @@ describe("create two http servers", function() {
 describe("create two http servers with one in ssl", function() {
 
 	before(function() {
-		return servers.release().then(function() { fs.rmdirpProm(crtpath); });
+		return servers.release().then(function() { return fs.rmdirpProm(crtpath); });
 	});
 
 	after(function() {
-		return servers.release().then(function() { fs.rmdirpProm(crtpath); });
+		return servers.release().then(function() { return fs.rmdirpProm(crtpath); });
 	});
 
 	it("should create servers", function() {
@@ -293,15 +293,15 @@ describe("create two http servers with one in ssl", function() {
 
 		}).then(function() {
 
-			assert.strictEqual(2, servers.webservers.length, "server number is incorrect");
+			assert.strictEqual(2, servers.servers.length, "server number is incorrect");
 
-			assert.strictEqual(1337, servers.webservers[0].port, "first server name is incorrect");
-			assert.strictEqual("basic http server", servers.webservers[0].name, "first server name is incorrect");
-			assert.strictEqual(false, servers.webservers[0].ssl, "first server ssl is incorrect");
+			assert.strictEqual(1337, servers.servers[0].options.port, "first server name is incorrect");
+			assert.strictEqual("basic http server", servers.servers[0].options.name, "first server name is incorrect");
+			assert.strictEqual(false, servers.servers[0].options.ssl, "first server ssl is incorrect");
 
-			assert.strictEqual(1338, servers.webservers[1].port, "second server name is incorrect");
-			assert.strictEqual("basic https server", servers.webservers[1].name, "second server name is incorrect");
-			assert.strictEqual(true, servers.webservers[1].ssl, "second server ssl is incorrect");
+			assert.strictEqual(1338, servers.servers[1].options.port, "second server name is incorrect");
+			assert.strictEqual("basic https server", servers.servers[1].options.name, "second server name is incorrect");
+			assert.strictEqual(true, servers.servers[1].options.ssl, "second server ssl is incorrect");
 
 			return Promise.resolve();
 

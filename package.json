@@ -1,7 +1,7 @@
 {
   "name": "node-multi-webserver",
-  "version": "0.1.0",
-  "description": "A 'fs' object extension",
+  "version": "0.1.2",
+  "description": "A multi http server manager",
   "main": "lib/main.js",
   "scripts": {
     "start": "node lib/main.js",

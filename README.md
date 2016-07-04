@@ -13,7 +13,7 @@ $ npm install node-multi-webserver
 
 # Doc
 
-* ``` object servers ``` servers managed
+* ``` object servers ``` servers managed (servers[x].options & servers[x].server)
 
 * ``` constructor() ```
 
@@ -26,6 +26,8 @@ $ npm install node-multi-webserver
 
 ```js
 const http = require("http"), https = require("https"), multiservers = require("node-multi-webserver");
+
+let servers = new multiservers();
 
     return servers.addServer({
       port: 80,

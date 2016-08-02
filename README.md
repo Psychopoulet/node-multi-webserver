@@ -33,7 +33,7 @@ const http = require("http"),
       multiservers = require("node-multi-webserver");
 
 let servers = new multiservers(),
-    app = express().get("/", function (req, res) {
+    app = express().get("/", (req, res) => {
 
   res.set("Content-Type", contentType).send(message);
 
@@ -42,7 +42,7 @@ let servers = new multiservers(),
 return servers.addServer({
   port: 80,
   name: "http server"
-}).then(function() {
+}).then(() => {
 
   return servers.addServer({
     port: 443,
@@ -52,7 +52,7 @@ return servers.addServer({
     cert: "YOUR_CERTIFICATE"
   });
 
-}).then(function() {
+}).then(() => {
 
   return servers.addServer({
     port: 1337,
@@ -61,9 +61,17 @@ return servers.addServer({
     cert: "YOUR_CERTIFICATE"
   });
 
-}).then(function() {
+}).then(() => {
 
   return servers.listen(app);
+
+}).catch((err) => {
+
+  console.log(err);
+
+  servers.release().catch((err) => {
+    console.log(err);
+  });
 
 });
 ```
@@ -79,7 +87,7 @@ let servers = new multiservers();
 return servers.addServer({
   port: 80,
   name: "http server"
-}).then(function() {
+}).then(() => {
 
   return servers.addServer({
     port: 443,
@@ -89,7 +97,7 @@ return servers.addServer({
     cert: "YOUR_CERTIFICATE"
   });
 
-}).then(function() {
+}).then(() => {
 
   return servers.addServer({
     port: 1337,
@@ -98,13 +106,21 @@ return servers.addServer({
     cert: "YOUR_CERTIFICATE"
   });
 
-}).then(function() {
+}).then(() => {
 
-  return servers.listen(function(req, res) {
+  return servers.listen((req, res) => {
 
     res.writeHead(200, {"Content-Type": contentType});
     res.end("hello world, from http:80, https:443 or https:1337");
 
+  });
+
+}).catch((err) => {
+
+  console.log(err);
+
+  servers.release().catch((err) => {
+    console.log(err);
   });
 
 });

@@ -29,27 +29,27 @@
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-describe("create one http server", function() {
+describe("create one http server", () => {
 
-	before(function() { return servers.release(); });
-	after(function() { return servers.release(); });
+	before(() => { return servers.release(); });
+	after(() => { return servers.release(); });
 
-	it("should create http server", function() {
+	it("should create http server", () => {
 
 		return servers.addServer({
 			port: 1337,
 			name: "basic http server",
 			ssl: false
-		}).then(function() {
+		}).then(() => {
 
-			return servers.listen(function(req, res) {
+			return servers.listen((req, res) => {
 
 				res.writeHead(200, {"Content-Type": contentType});
 				res.end(message);
 
 			});
 
-		}).then(function() {
+		}).then(() => {
 
 			assert.strictEqual(1, servers.servers.length, "server number is incorrect");
 
@@ -63,31 +63,31 @@ describe("create one http server", function() {
 
 	});
 
-	it("should request this server with wrong port", function(done) {
+	it("should request this server with wrong port", (done) => {
 
 		http.request({
 			port: 1338,
 			hostname: "127.0.0.1"
-		}, function(res) {
+		}, (res) => {
 
-			res.on("error", function () {
+			res.on("error", () => {
 				done();
-			}).on("end", function () {
+			}).on("end", () => {
 				done("Request passed");
 			});
 
-		}).on("error", function () {
+		}).on("error", () => {
 			done();
 		}).end();
 
 	}).timeout(5000);
 
-	it("should request this server with right data", function(done) {
+	it("should request this server with right data", (done) => {
 
 		http.request({
 			port: 1337,
 			hostname: "127.0.0.1"
-		}, function(res) {
+		}, (res) => {
 
 			res.setEncoding("utf8");
 
@@ -95,24 +95,24 @@ describe("create one http server", function() {
 			assert.strictEqual(contentType, res.headers["content-type"], "request content-type is incorrect");
 
 			let str = "";
-			res.on("data", function (chunk) {
+			res.on("data", (chunk) => {
 				str += chunk;
-			}).on("error", function (err) {
+			}).on("error", (err) => {
 				done(err);
-			}).on("end", function () {
+			}).on("end", () => {
 
 				assert.strictEqual(message, str, "request response is incorrect");
 				done();
 
 			});
 
-		}).on("error", function (err) {
+		}).on("error", (err) => {
 			done(err);
 		}).end();
 
 	}).timeout(5000);
 
-	it("should stop the server", function() {
+	it("should stop the server", () => {
 
 		return servers.release();
 
@@ -120,18 +120,18 @@ describe("create one http server", function() {
 
 });
 
-describe("create two http servers", function() {
+describe("create two http servers", () => {
 
-	before(function() { return servers.release(); });
-	after(function() { return servers.release(); });
+	before(() => { return servers.release(); });
+	after(() => { return servers.release(); });
 
-	it("should create servers", function() {
+	it("should create servers", () => {
 
 		return servers.addServer({
 			port: 1337,
 			name: "basic http server",
 			ssl: false
-		}).then(function() {
+		}).then(() => {
 
 			return servers.addServer({
 				port: 1338,
@@ -139,16 +139,16 @@ describe("create two http servers", function() {
 				ssl: false
 			});
 
-		}).then(function() {
+		}).then(() => {
 
-			return servers.listen(function(req, res) {
+			return servers.listen((req, res) => {
 
 				res.writeHead(200, {"Content-Type": contentType});
 				res.end(message);
 
 			});
 
-		}).then(function() {
+		}).then(() => {
 
 			assert.strictEqual(2, servers.servers.length, "server number is incorrect");
 
@@ -166,31 +166,31 @@ describe("create two http servers", function() {
 
 	}).timeout(5000);
 
-	it("should request these servers with wrong port", function(done) {
+	it("should request these servers with wrong port", (done) => {
 
 		http.request({
 			port: 1339,
 			hostname: "127.0.0.1"
-		}, function(res) {
+		}, (res) => {
 
-			res.on("error", function () {
+			res.on("error", () => {
 				done();
-			}).on("end", function () {
+			}).on("end", () => {
 				done("Request passed");
 			});
 
-		}).on("error", function () {
+		}).on("error", () => {
 			done();
 		}).end();
 
 	}).timeout(5000);
 
-	it("should request first server", function(done) {
+	it("should request first server", (done) => {
 
 		http.request({
 			port: 1337,
 			hostname: "127.0.0.1"
-		}, function(res) {
+		}, (res) => {
 
 			res.setEncoding("utf8");
 
@@ -198,29 +198,29 @@ describe("create two http servers", function() {
 			assert.strictEqual(contentType, res.headers["content-type"], "request content-type is incorrect");
 
 			let str = "";
-			res.on("data", function (chunk) {
+			res.on("data", (chunk) => {
 				str += chunk;
-			}).on("error", function (err) {
+			}).on("error", (err) => {
 				done(err);
-			}).on("end", function () {
+			}).on("end", () => {
 
 				assert.strictEqual(message, str, "request response is incorrect");
 				done();
 
 			});
 
-		}).on("error", function (err) {
+		}).on("error", (err) => {
 			done(err);
 		}).end();
 
 	}).timeout(5000);
 
-	it("should request second server", function(done) {
+	it("should request second server", (done) => {
 
 		http.request({
 			port: 1338,
 			hostname: "127.0.0.1"
-		}, function(res) {
+		}, (res) => {
 
 			res.setEncoding("utf8");
 
@@ -228,24 +228,24 @@ describe("create two http servers", function() {
 			assert.strictEqual(contentType, res.headers["content-type"], "request content-type is incorrect");
 
 			let str = "";
-			res.on("data", function (chunk) {
+			res.on("data", (chunk) => {
 				str += chunk;
-			}).on("error", function (err) {
+			}).on("error", (err) => {
 				done(err);
-			}).on("end", function () {
+			}).on("end", () => {
 
 				assert.strictEqual(message, str, "request response is incorrect");
 				done();
 
 			});
 
-		}).on("error", function (err) {
+		}).on("error", (err) => {
 			done(err);
 		}).end();
 
 	}).timeout(5000);
 
-	it("should stop the server", function() {
+	it("should stop the server", () => {
 
 		return servers.release();
 
@@ -253,27 +253,27 @@ describe("create two http servers", function() {
 
 });
 
-describe("create two http servers with one in ssl", function() {
+describe("create two http servers with one in ssl", () => {
 
-	before(function() {
-		return servers.release().then(function() { return fs.rmdirpProm(crtpath); });
+	before(() => {
+		return servers.release().then(() => { return fs.rmdirpProm(crtpath); });
 	});
 
-	after(function() {
-		return servers.release().then(function() { return fs.rmdirpProm(crtpath); });
+	after(() => {
+		return servers.release().then(() => { return fs.rmdirpProm(crtpath); });
 	});
 
-	it("should create servers", function() {
+	it("should create servers", () => {
 
 		return servers.addServer({
 			port: 1337,
 			name: "basic http server",
 			ssl: false
-		}).then(function() {
+		}).then(() => {
 
 			return SSL.createCertificate(serverkey, servercsr, servercrt);
 
-		}).then(function(data) {
+		}).then((data) => {
 
 			return servers.addServer({
 				port: 1338,
@@ -283,16 +283,16 @@ describe("create two http servers with one in ssl", function() {
 				cert: data.certificate
 			});
 
-		}).then(function() {
+		}).then(() => {
 
-			return servers.listen(function(req, res) {
+			return servers.listen((req, res) => {
 
 				res.writeHead(200, {"Content-Type": contentType});
 				res.end(message);
 
 			});
 
-		}).then(function() {
+		}).then(() => {
 
 			assert.strictEqual(2, servers.servers.length, "server number is incorrect");
 
@@ -310,31 +310,31 @@ describe("create two http servers with one in ssl", function() {
 
 	}).timeout(5000);
 
-	it("should request these servers with wrong port", function(done) {
+	it("should request these servers with wrong port", (done) => {
 
 		http.request({
 			port: 1339,
 			hostname: "127.0.0.1"
-		}, function(res) {
+		}, (res) => {
 
-			res.on("error", function () {
+			res.on("error", () => {
 				done();
-			}).on("end", function () {
+			}).on("end", () => {
 				done("Request passed");
 			});
 
-		}).on("error", function () {
+		}).on("error", () => {
 			done();
 		}).end();
 
 	}).timeout(5000);
 
-	it("should request first server", function(done) {
+	it("should request first server", (done) => {
 
 		http.request({
 			port: 1337,
 			hostname: "127.0.0.1"
-		}, function(res) {
+		}, (res) => {
 
 			res.setEncoding("utf8");
 
@@ -342,24 +342,24 @@ describe("create two http servers with one in ssl", function() {
 			assert.strictEqual(contentType, res.headers["content-type"], "request content-type is incorrect");
 
 			let str = "";
-			res.on("data", function (chunk) {
+			res.on("data", (chunk) => {
 				str += chunk;
-			}).on("error", function (err) {
+			}).on("error", (err) => {
 				done(err);
-			}).on("end", function () {
+			}).on("end", () => {
 
 				assert.strictEqual(message, str, "request response is incorrect");
 				done();
 
 			});
 
-		}).on("error", function (err) {
+		}).on("error", (err) => {
 			done(err);
 		}).end();
 
 	}).timeout(5000);
 
-	it("should request second server", function(done) {
+	it("should request second server", (done) => {
 
 		https.request({
 			port: 1338,
@@ -367,7 +367,7 @@ describe("create two http servers with one in ssl", function() {
 			rejectUnauthorized: false,
 			requestCert: true,
 			agent: false
-		}, function(res) {
+		}, (res) => {
 
 			res.setEncoding("utf8");
 
@@ -375,24 +375,24 @@ describe("create two http servers with one in ssl", function() {
 			assert.strictEqual(contentType, res.headers["content-type"], "request content-type is incorrect");
 
 			let str = "";
-			res.on("data", function (chunk) {
+			res.on("data", (chunk) => {
 				str += chunk;
-			}).on("error", function (err) {
+			}).on("error", (err) => {
 				done(err);
-			}).on("end", function () {
+			}).on("end", () => {
 
 				assert.strictEqual(message, str, "request response is incorrect");
 				done();
 
 			});
 
-		}).on("error", function (err) {
+		}).on("error", (err) => {
 			done(err);
 		}).end();
 
 	}).timeout(5000);
 
-	it("should stop the server", function() {
+	it("should stop the server", () => {
 
 		return servers.release();
 
@@ -400,37 +400,37 @@ describe("create two http servers with one in ssl", function() {
 
 });
 
-describe("create two http servers with one in ssl with express", function() {
+describe("create two http servers with one in ssl with express", () => {
 
-	let app = express().get("/", function (req, res) {
+	let app = express().get("/", (req, res) => {
 
 		res.set("Content-Type", contentType).send(message);
 
-	}).get("/test", function (req, res) {
+	}).get("/test", (req, res) => {
 
 		res.set("Content-Type", contentType).send("Hello World 2");
 
 	});
 
-	before(function() {
-		return servers.release().then(function() { return fs.rmdirpProm(crtpath); });
+	before(() => {
+		return servers.release().then(() => { return fs.rmdirpProm(crtpath); });
 	});
 
-	after(function() {
-		return servers.release().then(function() { return fs.rmdirpProm(crtpath); });
+	after(() => {
+		return servers.release().then(() => { return fs.rmdirpProm(crtpath); });
 	});
 
-	it("should create servers", function() {
+	it("should create servers", () => {
 
 		return servers.addServer({
 			port: 1337,
 			name: "basic http server",
 			ssl: false
-		}).then(function() {
+		}).then(() => {
 
 			return SSL.createCertificate(serverkey, servercsr, servercrt);
 
-		}).then(function(data) {
+		}).then((data) => {
 
 			return servers.addServer({
 				port: 1338,
@@ -440,11 +440,11 @@ describe("create two http servers with one in ssl with express", function() {
 				cert: data.certificate
 			});
 
-		}).then(function() {
+		}).then(() => {
 
 			return servers.listen(app);
 
-		}).then(function() {
+		}).then(() => {
 
 			assert.strictEqual(2, servers.servers.length, "server number is incorrect");
 
@@ -462,55 +462,55 @@ describe("create two http servers with one in ssl with express", function() {
 
 	}).timeout(5000);
 
-	it("should request these servers with wrong port", function(done) {
+	it("should request these servers with wrong port", (done) => {
 
 		http.request({
 			port: 1339,
 			hostname: "127.0.0.1"
-		}, function(res) {
+		}, (res) => {
 
-			res.on("error", function () {
+			res.on("error", () => {
 				done();
-			}).on("end", function () {
+			}).on("end", () => {
 				done("Request passed");
 			});
 
-		}).on("error", function () {
+		}).on("error", () => {
 			done();
 		}).end();
 
 	}).timeout(5000);
 
-	it("should request first server", function(done) {
+	it("should request first server", (done) => {
 
 		http.request({
 			port: 1337,
 			hostname: "127.0.0.1"
-		}, function(res) {
+		}, (res) => {
 
 			res.setEncoding("utf8");
 
 			assert.strictEqual(200, res.statusCode, "request statusCode is incorrect");
 
 			let str = "";
-			res.on("data", function (chunk) {
+			res.on("data", (chunk) => {
 				str += chunk;
-			}).on("error", function (err) {
+			}).on("error", (err) => {
 				done(err);
-			}).on("end", function () {
+			}).on("end", () => {
 
 				assert.strictEqual(message, str, "request response is incorrect");
 				done();
 
 			});
 
-		}).on("error", function (err) {
+		}).on("error", (err) => {
 			done(err);
 		}).end();
 
 	}).timeout(5000);
 
-	it("should request second server", function(done) {
+	it("should request second server", (done) => {
 
 		https.request({
 			port: 1338,
@@ -518,31 +518,31 @@ describe("create two http servers with one in ssl with express", function() {
 			rejectUnauthorized: false,
 			requestCert: true,
 			agent: false
-		}, function(res) {
+		}, (res) => {
 
 			res.setEncoding("utf8");
 
 			assert.strictEqual(200, res.statusCode, "request statusCode is incorrect");
 
 			let str = "";
-			res.on("data", function (chunk) {
+			res.on("data", (chunk) => {
 				str += chunk;
-			}).on("error", function (err) {
+			}).on("error", (err) => {
 				done(err);
-			}).on("end", function () {
+			}).on("end", () => {
 
 				assert.strictEqual(message, str, "request response is incorrect");
 				done();
 
 			});
 
-		}).on("error", function (err) {
+		}).on("error", (err) => {
 			done(err);
 		}).end();
 
 	}).timeout(5000);
 
-	it("should request second server with path", function(done) {
+	it("should request second server with path", (done) => {
 
 		https.request({
 			port: 1338,
@@ -551,31 +551,31 @@ describe("create two http servers with one in ssl with express", function() {
 			rejectUnauthorized: false,
 			requestCert: true,
 			agent: false
-		}, function(res) {
+		}, (res) => {
 
 			res.setEncoding("utf8");
 
 			assert.strictEqual(200, res.statusCode, "request statusCode is incorrect");
 
 			let str = "";
-			res.on("data", function (chunk) {
+			res.on("data", (chunk) => {
 				str += chunk;
-			}).on("error", function (err) {
+			}).on("error", (err) => {
 				done(err);
-			}).on("end", function () {
+			}).on("end", () => {
 
 				assert.strictEqual("Hello World 2", str, "request response is incorrect");
 				done();
 
 			});
 
-		}).on("error", function (err) {
+		}).on("error", (err) => {
 			done(err);
 		}).end();
 
 	}).timeout(5000);
 
-	it("should stop the server", function() {
+	it("should stop the server", () => {
 
 		return servers.release();
 

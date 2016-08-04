@@ -18,8 +18,9 @@ $ npm install node-multi-webserver
 * ``` constructor() ```
 
 * ``` addServer(object options) : return Promise instance  ``` add server options (mandatory : "port" & "name" for http & https, + "key" & "cert" for https) (ssl : default = false)
-* ``` listen(function requestListener) : return Promise instance ```
-* ``` close() : return Promise instance ``` close all servers
+* ``` setTimeout(number timeout) : return Promise instance ``` set timeout to all servers
+* ``` listen(function requestListener) : return Promise instance ``` run your logic on all servers
+* ``` close() : return Promise instance ``` close all servers & kill sockets (with "http-shutdown" module)
 * ``` release() : return Promise instance ``` call "close" and forget servers options
 
 # Examples
@@ -60,6 +61,10 @@ return servers.addServer({
     key: "YOUR_PRIVATE_KEY",
     cert: "YOUR_CERTIFICATE"
   });
+
+}).then(() => {
+
+  return servers.setTimeout(2 * 1000);
 
 }).then(() => {
 
@@ -105,6 +110,10 @@ return servers.addServer({
     key: "YOUR_PRIVATE_KEY",
     cert: "YOUR_CERTIFICATE"
   });
+
+}).then(() => {
+
+  return servers.setTimeout(2 * 1000);
 
 }).then(() => {
 

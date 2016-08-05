@@ -34,105 +34,139 @@ describe("test wrong using", () => {
 	before(() => { return servers.release(); });
 	after(() => { return servers.release(); });
 
-	it("should fail on missing timeout", () => {
+	describe("timeout", () => {
 
-		return servers.setTimeout().then(() => {
-			return Promise.reject("run with missing timeout");
-		}).catch(() => {
-			return Promise.resolve();
-		});
+		it("should fail on missing timeout", () => {
 
-	});
-
-		it("should fail on wrong timeout", () => {
-
-			return servers.setTimeout("test").then(() => {
-				return Promise.reject("run with wrong timeout");
+			return servers.setTimeout().then(() => {
+				return Promise.reject("run with missing timeout");
 			}).catch(() => {
 				return Promise.resolve();
 			});
 
 		});
 
-	it("should fail on missing options", () => {
+			it("should fail on wrong timeout", () => {
 
-		return servers.addServer().then(() => {
-			return Promise.reject("run with missing options");
-		}).catch(() => {
-			return Promise.resolve();
-		});
-
-	});
-
-		it("should fail on wrong options", () => {
-
-			return servers.addServer(false).then(() => {
-				return Promise.reject("run with wrong options");
-			}).catch(() => {
-				return Promise.resolve();
-			});
-
-		});
-
-		it("should fail on missing name option", () => {
-
-			return servers.addServer({}).then(() => {
-				return Promise.reject("run with missing name option");
-			}).catch(() => {
-				return Promise.resolve();
-			});
-
-		});
-
-			it("should fail on wrong name option", () => {
-
-				return servers.addServer({ name: 5 }).then(() => {
-					return Promise.reject("run with wrong name option");
+				return servers.setTimeout("test").then(() => {
+					return Promise.reject("run with wrong timeout");
 				}).catch(() => {
 					return Promise.resolve();
 				});
 
 			});
 
-		it("should fail on missing port option", () => {
+	});
 
-			return servers.addServer({ name: "test" }).then(() => {
-				return Promise.reject("run with missing port option");
+	describe("addServer", () => {
+
+		it("should fail on missing options", () => {
+
+			return servers.addServer().then(() => {
+				return Promise.reject("run with missing options");
 			}).catch(() => {
 				return Promise.resolve();
 			});
 
 		});
 
-			it("should fail on wrong port option", () => {
+			it("should fail on wrong options", () => {
 
-				return servers.addServer({ name: "test", port: "cinq" }).then(() => {
-					return Promise.reject("run with wrong port option");
+				return servers.addServer(false).then(() => {
+					return Promise.reject("run with wrong options");
 				}).catch(() => {
 					return Promise.resolve();
 				});
 
 			});
 
-	it("should fail on missing requestListener", () => {
+			it("should fail on missing name option", () => {
 
-		return servers.listen().then(() => {
-			return Promise.reject("run with missing requestListener");
-		}).catch(() => {
-			return Promise.resolve();
-		});
+				return servers.addServer({}).then(() => {
+					return Promise.reject("run with missing name option");
+				}).catch(() => {
+					return Promise.resolve();
+				});
 
-	});
+			});
 
-		it("should fail on wrong requestListener", () => {
+				it("should fail on wrong name option", () => {
 
-			return servers.listen(false).then(() => {
-				return Promise.reject("run with wrong requestListener");
+					return servers.addServer({ name: 5 }).then(() => {
+						return Promise.reject("run with wrong name option");
+					}).catch(() => {
+						return Promise.resolve();
+					});
+
+				});
+
+			it("should fail on missing port option", () => {
+
+				return servers.addServer({ name: "test" }).then(() => {
+					return Promise.reject("run with missing port option");
+				}).catch(() => {
+					return Promise.resolve();
+				});
+
+			});
+
+				it("should fail on wrong port option", () => {
+
+					return servers.addServer({ name: "test", port: "cinq" }).then(() => {
+						return Promise.reject("run with wrong port option");
+					}).catch(() => {
+						return Promise.resolve();
+					});
+
+				});
+
+		it("should fail on already used port", () => {
+
+			return servers.addServer({ name: "test", port: 1337 }).then(() => {
+				return servers.addServer({ name: "test2", port: 1337 });
+			}).then(() => {
+				return Promise.reject("run with already used port");
 			}).catch(() => {
 				return Promise.resolve();
 			});
 
 		});
+
+		it("should fail on already used name", () => {
+
+			return servers.addServer({ name: "test", port: 1338 }).then(() => {
+				return Promise.reject("run with already used name");
+			}).catch(() => {
+				return Promise.resolve();
+			});
+
+		});
+
+	});
+
+	describe("listen", () => {
+
+		it("should fail on missing requestListener", () => {
+
+			return servers.listen().then(() => {
+				return Promise.reject("run with missing requestListener");
+			}).catch(() => {
+				return Promise.resolve();
+			});
+
+		});
+
+			it("should fail on wrong requestListener", () => {
+
+				return servers.listen(false).then(() => {
+					return Promise.reject("run with wrong requestListener");
+				}).catch(() => {
+					return Promise.resolve();
+				});
+
+			});
+
+	});
 
 });
 

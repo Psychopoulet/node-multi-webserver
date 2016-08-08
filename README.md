@@ -10,6 +10,8 @@ $ npm install node-multi-webserver
 # Features
 
   run the same server with different configurations (ports, ssl, etc...)
+  
+  note : to use sockets on the same way, you should see the [node-multi-socketservers](https://www.npmjs.com/package/node-multi-socketservers) module
 
 # Doc
 

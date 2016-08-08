@@ -193,6 +193,7 @@ describe("create one http server", () => {
 		}).then(() => {
 
 			assert.strictEqual(1, servers.servers.length, "server number is incorrect");
+			assert.strictEqual(true, servers.listening(), "server is not listening");
 
 			assert.strictEqual(1337, servers.servers[0].options.port, "first server name is incorrect");
 			assert.strictEqual("basic http server", servers.servers[0].options.name, "first server name is incorrect");
@@ -292,6 +293,7 @@ describe("create two http servers", () => {
 		}).then(() => {
 
 			assert.strictEqual(2, servers.servers.length, "server number is incorrect");
+			assert.strictEqual(true, servers.listening(), "servers are not listening");
 
 			assert.strictEqual(1337, servers.servers[0].options.port, "first server name is incorrect");
 			assert.strictEqual("basic http server", servers.servers[0].options.name, "first server name is incorrect");
@@ -436,6 +438,7 @@ describe("create two http servers with one in ssl", () => {
 		}).then(() => {
 
 			assert.strictEqual(2, servers.servers.length, "server number is incorrect");
+			assert.strictEqual(true, servers.listening(), "servers are not listening");
 
 			assert.strictEqual(1337, servers.servers[0].options.port, "first server name is incorrect");
 			assert.strictEqual("basic http server", servers.servers[0].options.name, "first server name is incorrect");
@@ -588,6 +591,7 @@ describe("create two http servers with one in ssl with express", () => {
 		}).then(() => {
 
 			assert.strictEqual(2, servers.servers.length, "server number is incorrect");
+			assert.strictEqual(true, servers.listening(), "servers are not listening");
 
 			assert.strictEqual(1337, servers.servers[0].options.port, "first server name is incorrect");
 			assert.strictEqual("basic http server", servers.servers[0].options.name, "first server name is incorrect");

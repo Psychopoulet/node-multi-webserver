@@ -19,6 +19,7 @@ $ npm install node-multi-webserver
 
 * ``` constructor() ```
 
+* ``` listening() : return boolean  ``` is there a server listening ?
 * ``` addServer(object options) : return Promise instance  ``` add server options (mandatory : "port" & "name" for http & https, + "key" & "cert" for https) (ssl : default = false)
 * ``` setTimeout(number timeout) : return Promise instance ``` set timeout to all servers
 * ``` listen(function requestListener) : return Promise instance ``` run your logic on all servers

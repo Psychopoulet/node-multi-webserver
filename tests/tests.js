@@ -192,6 +192,15 @@ describe("create one http server", () => {
 
 		}).then(() => {
 
+			return servers.listen((req, res) => {
+
+				res.writeHead(200, {"Content-Type": contentType});
+				res.end(message);
+
+			});
+
+		}).then(() => {
+
 			assert.strictEqual(1, servers.servers.length, "server number is incorrect");
 			assert.strictEqual(true, servers.listening(), "server is not listening");
 

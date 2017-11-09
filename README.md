@@ -1,9 +1,9 @@
 # node-multi-webserver
 A multi http server manager
 
-[![Build Status](https://api.travis-ci.org/Psychopoulet/node-multi-webserver.svg?branch=develop)](https://travis-ci.org/Psychopoulet/node-multi-webserver)
-[![Coverage Status](https://coveralls.io/repos/github/Psychopoulet/node-multi-webserver/badge.svg?branch=develop)](https://coveralls.io/github/Psychopoulet/node-multi-webserver)
-[![Dependency Status](https://img.shields.io/david/Psychopoulet/node-multi-webserver/develop.svg)](https://github.com/Psychopoulet/node-multi-webserver)
+[![Build Status](https://api.travis-ci.org/Psychopoulet/node-multi-webservers.svg?branch=develop)](https://travis-ci.org/Psychopoulet/node-multi-webservers)
+[![Coverage Status](https://coveralls.io/repos/github/Psychopoulet/node-multi-webservers/badge.svg?branch=develop)](https://coveralls.io/github/Psychopoulet/node-multi-webservers)
+[![Dependency Status](https://img.shields.io/david/Psychopoulet/node-multi-webservers/develop.svg)](https://github.com/Psychopoulet/node-multi-webservers)
 
 # Installation
 

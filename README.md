@@ -1,6 +1,10 @@
 # node-multi-webserver
 A multi http server manager
 
+[![Build Status](https://api.travis-ci.org/Psychopoulet/node-multi-webservers.svg?branch=develop)](https://travis-ci.org/Psychopoulet/node-multi-webservers)
+[![Coverage Status](https://coveralls.io/repos/github/Psychopoulet/node-multi-webservers/badge.svg?branch=develop)](https://coveralls.io/github/Psychopoulet/node-multi-webservers)
+[![Dependency Status](https://img.shields.io/david/Psychopoulet/node-multi-webservers/develop.svg)](https://github.com/Psychopoulet/node-multi-webservers)
+
 # Installation
 
 ```bash
@@ -142,7 +146,7 @@ return servers.addServer({
 # Tests
 
 ```bash
-$ gulp
+$ npm test
 ```
 
 ## License

@@ -24,8 +24,6 @@
 	const MESSAGE = "Hello World";
 	const CONTENT_TYPE = "text/plain";
 
-	const IS_WINDOWS = "win32" === require("os").platform();
-
 // tests
 
 (0, process).env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
@@ -824,9 +822,10 @@ describe("create two http servers with express", () => {
 
 });
 
-if (IS_WINDOWS) {
+const PATH = (0, process).env.Path || (0, process).env.PATH || {};
 
-	SimpleSSL.setOpenSSLBinPath(path.join(__dirname, "openssl.exe"));
+if (-1 < PATH.indexOf("openssl")) {
+
 	SimpleSSL.setOpenSSLConfPath(path.join(__dirname, "openssl.cnf"));
 
 	describe("create http server and https server", () => {
